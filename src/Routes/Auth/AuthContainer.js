@@ -97,6 +97,8 @@ const AuthContainer = () => {
         } catch {
           toast.error("Your secret is incorrect.");
         }
+      } else {
+        toast.error("Type your login secret.");
       }
     }
   };

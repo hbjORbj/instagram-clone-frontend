@@ -76,24 +76,26 @@ const AuthPresenter = ({
         )}
         {action === "confirm" && (
           <form onSubmit={onSubmit}>
-            <Input placeholder="Paste your login secret." required />
+            <Input placeholder="Paste your login secret." {...secret} />
             <Button text={"Log in"}></Button>
           </form>
         )}
       </Form>
-      <StateChanger>
-        {action === "logIn" ? (
-          <>
-            Don't have an account?{" "}
-            <Link onClick={() => setAction("signUp")}>Sign up</Link>
-          </>
-        ) : (
-          <>
-            Have an account?{" "}
-            <Link onClick={() => setAction("logIn")}>Log in</Link>
-          </>
-        )}
-      </StateChanger>
+      {action !== "confirm" && (
+        <StateChanger>
+          {action === "logIn" ? (
+            <>
+              Don't have an account?{" "}
+              <Link onClick={() => setAction("signUp")}>Sign up</Link>
+            </>
+          ) : (
+            <>
+              Have an account?{" "}
+              <Link onClick={() => setAction("logIn")}>Log in</Link>
+            </>
+          )}
+        </StateChanger>
+      )}
     </Wrapper>
   );
 };
