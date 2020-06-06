@@ -6,6 +6,7 @@ const Theme = {
   pinkColor: "#ED4956",
   darkGreyColor: "#999",
   lightGreyColor: "#c7c7c7",
+  maxWidth: "935px",
   boxBorder: "1px solid #e6e6e6",
   borderRadius: "4px",
   whiteBox: `border: 1px solid #e6e6e6;

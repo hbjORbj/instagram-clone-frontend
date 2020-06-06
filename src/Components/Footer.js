@@ -8,7 +8,7 @@ const Footer = styled.div`
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
-  margin-top: 90px;
+  flex-wrap: wrap;
 `;
 
 const List = styled.ul`

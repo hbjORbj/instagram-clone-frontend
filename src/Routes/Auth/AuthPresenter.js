@@ -16,6 +16,7 @@ const Box = styled.div`
   border-radius:0px;
   width: 100%;
   max-width: 350px;
+  margin-bottom: 100px;
 `;
 
 const Form = styled(Box)`
