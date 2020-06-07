@@ -9,6 +9,7 @@ const Footer = styled.div`
   font-weight: 600;
   font-size: 12px;
   flex-wrap: wrap;
+  padding-bottom: 15px;
 `;
 
 const List = styled.ul`
@@ -60,6 +61,8 @@ export default () => (
         <Link href="#">profiles</Link>
       </ListItem>
     </List>
-    <Copyright>Benny Joo's Instagram-Clone {new Date().getFullYear()} &copy;</Copyright>
+    <Copyright>
+      Benny Joo's Instagram-Clone {new Date().getFullYear()} &copy;
+    </Copyright>
   </Footer>
 );
