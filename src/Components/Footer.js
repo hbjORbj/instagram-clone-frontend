@@ -59,13 +59,7 @@ export default () => (
       <ListItem>
         <Link href="#">profiles</Link>
       </ListItem>
-      <ListItem>
-        <Link href="#">hashtags</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">language</Link>
-      </ListItem>
     </List>
-    <Copyright>Instagram-Clone {new Date().getFullYear()} &copy;</Copyright>
+    <Copyright>Benny Joo's Instagram-Clone {new Date().getFullYear()} &copy;</Copyright>
   </Footer>
 );
