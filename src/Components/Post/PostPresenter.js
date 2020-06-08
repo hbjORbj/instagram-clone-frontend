@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import TextareaAutosize from "react-autosize-textarea";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
 import { FullHeart, EmptyHeart, Comment } from "../Icons";
@@ -28,10 +29,35 @@ const Location = styled.span`
   margin-top: 5px;
 `;
 
-const Files = styled.div``;
+const Files = styled.div`
+  position: relative;
+  padding-bottom: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+`;
 
 const File = styled.img`
   max-width: 100%;
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  background-image: url(${(props) => props.src}});
+  background-size: cover;
+  background-position: center;
+  opacity: ${(props) => (props.showing ? 1 : 0)};
+  transition: 0.5s linear;
+`;
+
+const Textarea = styled(TextareaAutosize)`
+  border: none;
+  width: 100%;
+  resize: none;
+  margin-top: 10px;
+  font-size: 14px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Meta = styled.div`
@@ -57,7 +83,7 @@ const Timestamp = styled.span`
   opacity: 0.4;
   display: block;
   font-size: 12px;
-  margin: 10px 0px;
+  margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: ${(props) => props.theme.lightGreyColor} 0.3px solid;
 `;
@@ -69,6 +95,8 @@ const PostPresenter = ({
   isLiked,
   likeCount,
   createdAt,
+  newComment,
+  currentItem,
 }) => (
   <Post>
     <Header>
@@ -79,7 +107,10 @@ const PostPresenter = ({
       </UserColumn>
     </Header>
     <Files>
-      {files && files.map((file) => <File id={file.id} src={file.url} />)}
+      {files &&
+        files.map((file, index) => (
+          <File key={file.id} src={file.url} showing={index === currentItem} />
+        ))}
     </Files>
     <Meta>
       <Buttons>
@@ -89,6 +120,7 @@ const PostPresenter = ({
         </Button>
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+      <Textarea placeholder={"Add a comment..."} {...newComment} />
       <Timestamp>{createdAt}</Timestamp>
     </Meta>
   </Post>
