@@ -10,6 +10,7 @@ const Post = styled.div`
   width: 100%;
   max-width: 600px;
   margin-bottom: 25px;
+  user-select: none;
 `;
 
 const Header = styled.header`
@@ -97,6 +98,7 @@ const PostPresenter = ({
   createdAt,
   newComment,
   currentItem,
+  toggleLike,
 }) => (
   <Post>
     <Header>
@@ -114,7 +116,9 @@ const PostPresenter = ({
     </Files>
     <Meta>
       <Buttons>
-        <Button>{isLiked ? <FullHeart /> : <EmptyHeart />}</Button>
+        <Button onClick={toggleLike}>
+          {isLiked ? <FullHeart /> : <EmptyHeart />}
+        </Button>
         <Button>
           <Comment />
         </Button>
