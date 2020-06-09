@@ -19,7 +19,9 @@ const PostContainer = ({
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
+  const [selfComments, setSelfComments] = useState([]);
   const comment = useInput("");
+
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id },
   });
@@ -47,6 +49,19 @@ const PostContainer = ({
     toggleLikeMutation();
   };
 
+  const onKeyPress = async (e) => {
+    const { which } = e;
+    if (which === 13) {
+      e.preventDefault();
+      if (comment.value === "") return;
+      const {
+        data: { addComment },
+      } = await addCommentMutation();
+      setSelfComments([...selfComments, addComment]);
+      comment.setValue("");
+    }
+  };
+
   return (
     <PostPresenter
       user={user}
@@ -58,10 +73,10 @@ const PostContainer = ({
       comments={comments}
       createdAt={createdAt}
       newComment={comment}
-      setIsLiked={setIsLiked}
-      setLikeCount={setLikeCount}
       currentItem={currentItem}
       toggleLike={toggleLike}
+      onKeyPress={onKeyPress}
+      selfComments={selfComments}
     />
   );
 };
