@@ -65,11 +65,11 @@ const Textarea = styled(TextareaAutosize)`
 `;
 
 const Comments = styled.ul`
-  margin-top: 10px;
+  margin-top: 8px;
 `;
 
 const Comment = styled.li`
-  margin-bottom: 7px;
+  margin-bottom: 8px;
   span {
     margin-right: 5px;
   }
@@ -107,8 +107,13 @@ const UserLink = styled(Link)`
   color: ${(props) => props.theme.blackColor};
 `;
 
+const Caption = styled.div`
+  margin: 8px 0px;
+`;
+
 const PostPresenter = ({
   user: { username, avatar },
+  caption,
   location,
   files,
   isLiked,
@@ -149,6 +154,9 @@ const PostPresenter = ({
         </Button>
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+      <Caption>
+        <FatText text={username} /> {caption}
+      </Caption>
       {comments && (
         <Comments>
           {comments.map((comment) => (

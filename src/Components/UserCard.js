@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import FatText from "./FatText";
-import Button from "./Button";
+import FollowButton from "./FollowButton/FollowButtonContainer";
 import { Link } from "react-router-dom";
 
 const Card = styled.div`
@@ -12,32 +12,32 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-`;
-
-const EAvatar = styled(Avatar)`
-  margin-bottom: 15px;
+  justify-content: space-around;
 `;
 
 const ELink = styled(Link)`
   color: inherit;
-  margin-bottom: 10px;
 `;
 
-const UserCard = ({ url, username, isMySelf, isFollowing }) => (
-  <Card>
-    <EAvatar url={url} size={"md"} />
-    <ELink to={`/${username}`}>
-      <FatText text={username} />
-    </ELink>
-    {!isMySelf && <Button text={isFollowing ? "Unfollow" : "Follow"} />}
-  </Card>
-);
+const UserCard = ({ url, username, isMyself, amIFollowing, id }) => {
+  return (
+    <Card>
+      <ELink>
+        <Avatar url={url} size={"md"} />
+      </ELink>
+      <ELink to={`/${username}`}>
+        <FatText text={username} />
+      </ELink>
+      {!isMyself && <FollowButton id={id} amIFollowing={amIFollowing} />}
+    </Card>
+  );
+};
 
 UserCard.propTypes = {
   url: PropTypes.string,
   username: PropTypes.string.isRequired,
-  isMySelf: PropTypes.bool.isRequired,
-  isFollowing: PropTypes.bool.isRequired,
+  isMyself: PropTypes.bool.isRequired,
+  amIFollowing: PropTypes.bool.isRequired,
 };
 
 export default UserCard;

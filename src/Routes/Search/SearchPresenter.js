@@ -4,52 +4,78 @@ import PropTypes from "prop-types";
 import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
+import PostCard from "../../Components/PostCard";
 
 const Wrapper = styled.div`
-  height: 50vh;
+  min-height: 85vh;
 `;
 
-const Section = styled.div`
-  height: 50vh;
+const UserSection = styled.div`
+  margin-bottom: 70px;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(4, 160px);
+  grid-template-rows: 160px;
+  grid-auto-rows: 160px;
+`;
+
+const PostSection = styled.div`
+  margin-bottom: 70px;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(4, 200px);
+  grid-template-rows: 200px;
+  grid-auto-rows: 200px;
+`;
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
 `;
 
 const SearchPresenter = ({ loading, data, searchTerm }) => {
-  console.log(data);
   if (loading) {
     return (
-      <Wrapper>
+      <LoaderWrapper>
         <Loader />
-      </Wrapper>
+      </LoaderWrapper>
     );
   } else if (data && data.searchUser && data.searchPost) {
     return (
       <Wrapper>
-        <Section>
+        <UserSection>
           {data.searchUser.length === 0 ? (
             <FatText text={"No Users Found"} />
           ) : (
             data.searchUser.map((user) => (
               <UserCard
-                key={user.id}
+                id={user.id}
                 username={user.username}
-                isFollowing={user.isFollowing}
+                amIFollowing={user.amIFollowing}
                 url={user.avatar}
-                isMySelf={user.isMySelf}
+                isMyself={user.isMyself}
               />
             ))
           )}
-        </Section>
-        <Section>
+        </UserSection>
+        <PostSection>
           {data.searchPost.length === 0 ? (
             <FatText text="No Posts Found" />
           ) : (
-            data.searchPost.map((post) => null)
+            data.searchPost.map((post) => (
+              <PostCard
+                likeCount={post.likeCount}
+                commentCount={post.commentCount}
+                file={post.files[0]}
+              />
+            ))
           )}
-        </Section>
+        </PostSection>
       </Wrapper>
     );
-  } else {
-    return <FatText text={"YEAH"} />;
   }
 };
 

@@ -6,14 +6,16 @@ export const SEARCH = gql`
       id
       avatar
       username
-      isFollowing
-      isMySelf
+      amIFollowing
+      isMyself
     }
     searchPost(term: $term) {
+      id
       files {
         url
       }
       likeCount
+      commentCount
     }
   }
 `;
