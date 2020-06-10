@@ -6,7 +6,7 @@ import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
 import Post from "../Components/Post/PostContainer";
 
-const Feed_QUERY = gql`
+const FEED_QUERY = gql`
   {
     seeFeed {
       id
@@ -45,7 +45,7 @@ const Wrapper = styled.div`
 `;
 
 const Feed = () => {
-  const { data, loading } = useQuery(Feed_QUERY);
+  const { data, loading } = useQuery(FEED_QUERY);
   return (
     <Wrapper>
       <Helmet>

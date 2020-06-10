@@ -4,6 +4,7 @@ import TextareaAutosize from "react-autosize-textarea";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
 import { FullHeart, EmptyHeart, Comment as CommentIcon } from "../Icons";
+import { Link } from "react-router-dom";
 
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -102,6 +103,10 @@ const Timestamp = styled.span`
   border-bottom: ${(props) => props.theme.lightGreyColor} 0.3px solid;
 `;
 
+const UserLink = styled(Link)`
+  color: ${(props) => props.theme.blackColor};
+`;
+
 const PostPresenter = ({
   user: { username, avatar },
   location,
@@ -118,9 +123,13 @@ const PostPresenter = ({
 }) => (
   <Post>
     <Header>
-      <Avatar url={avatar} />
+      <UserLink to={`/${username}`}>
+        <Avatar url={avatar} />
+      </UserLink>
       <UserColumn>
-        <FatText text={username} />
+        <UserLink to={`/${username}`}>
+          <FatText text={username} />
+        </UserLink>
         <Location>{location}</Location>
       </UserColumn>
     </Header>
