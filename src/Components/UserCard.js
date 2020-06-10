@@ -22,10 +22,10 @@ const ELink = styled(Link)`
 const UserCard = ({ url, username, isMyself, amIFollowing, id }) => {
   return (
     <Card>
-      <ELink>
+      <ELink to={`/users/${username}`}>
         <Avatar url={url} size={"md"} />
       </ELink>
-      <ELink to={`/${username}`}>
+      <ELink to={`/users/${username}`}>
         <FatText text={username} />
       </ELink>
       {!isMyself && <FollowButton id={id} amIFollowing={amIFollowing} />}

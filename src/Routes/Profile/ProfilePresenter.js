@@ -6,21 +6,27 @@ import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
 import PostCard from "../../Components/PostCard";
 import FollowButton from "../../Components/FollowButton/FollowButtonContainer";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
   min-height: 85vh;
+  margin-bottom: 50px;
 `;
 
 const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: start;
   width: 80%;
   margin: 0 auto;
   margin-bottom: 40px;
 `;
 
-const HeaderColumn = styled.div``;
+const HeaderColumn = styled.div`
+  &:first-child {
+    margin-right: 100px;
+  }
+`;
 
 const UsernameRow = styled.div`
   display: flex;
@@ -29,42 +35,56 @@ const UsernameRow = styled.div`
 
 const Username = styled.span`
   font-size: 26px;
-  display: block;
+  margin-right: 35px;
+  font-weight: 300;
 `;
 
 const CountsRow = styled.ul`
   display: flex;
-  margin: 15px 0px;
+  margin: 25px 0px;
 `;
 
 const Count = styled.li`
   font-size: 16px;
   &:not(:last-child) {
-    margin-right: 10px;
+    margin-right: 50px;
   }
 `;
 
-const FullName = styled.span`
+const FullName = styled(FatText)`
   font-size: 16px;
 `;
 
 const Bio = styled.p`
   margin: 10px 0px;
+  word-wrap: break-word;
+  width: 320px;
 `;
 
 const Posts = styled.div`
+  border-top: ${(props) => props.theme.boxBorder};
+  padding-top: 40px;
   display: grid;
-  grid-template-columns: repeat(4, 200px);
-  grid-template-rows: 200px;
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(3, 310px);
+  grid-template-rows: 310px;
+  grid-auto-rows: 310px;
+  grid-gap: 30px;
 `;
 
-const ProfilePresenter = ({ loading, data }) => {
+const LoaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+`;
+
+const ProfilePresenter = ({ loading, data, logOut }) => {
   if (loading) {
     return (
-      <Wrapper>
+      <LoaderWrapper>
         <Loader />
-      </Wrapper>
+      </LoaderWrapper>
     );
   } else if (!loading && data && data.seeUser) {
     const {
@@ -94,7 +114,9 @@ const ProfilePresenter = ({ loading, data }) => {
           <HeaderColumn>
             <UsernameRow>
               <Username>{username}</Username>
-              {!isMyself && (
+              {isMyself ? (
+                <Button onClick={logOut} text={"Log Out"} />
+              ) : (
                 <FollowButton id={id} amIFollowing={amIFollowing} />
               )}
             </UsernameRow>
@@ -115,14 +137,17 @@ const ProfilePresenter = ({ loading, data }) => {
         </Header>
         <Posts>
           {posts &&
-            posts.map((post) => (
-              <PostCard
-                id={post.id}
-                likeCount={post.likeCount}
-                commentCount={post.commentCount}
-                file={post.files[0]}
-              />
-            ))}
+            posts.map((item, idx, arr) => {
+              let post = arr[arr.length - idx - 1];
+              return (
+                <PostCard
+                  id={post.id}
+                  likeCount={post.likeCount}
+                  commentCount={post.commentCount}
+                  file={post.files[0]}
+                />
+              );
+            })}
         </Posts>
       </Wrapper>
     );

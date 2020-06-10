@@ -6,12 +6,13 @@ import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
 import Post from "../Components/Post/PostContainer";
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   {
     seeFeed {
       id
       location
       caption
+      commentCount
       user {
         id
         avatar

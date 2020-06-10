@@ -128,11 +128,11 @@ const PostPresenter = ({
 }) => (
   <Post>
     <Header>
-      <UserLink to={`/${username}`}>
+      <UserLink to={`/users/${username}`}>
         <Avatar url={avatar} />
       </UserLink>
       <UserColumn>
-        <UserLink to={`/${username}`}>
+        <UserLink to={`/users/${username}`}>
           <FatText text={username} />
         </UserLink>
         <Location>{location}</Location>

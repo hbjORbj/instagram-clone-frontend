@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { FullHeart, FullComment } from "./Icons";
+import { Link } from "react-router-dom";
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
@@ -34,6 +35,7 @@ const NumberText = styled.span`
 const Container = styled.div`
   background-image: url(${(props) => props.bg});
   background-size: cover;
+  background-position: center;
   cursor: pointer;
   &:hover {
     ${Overlay} {
@@ -42,18 +44,20 @@ const Container = styled.div`
   }
 `;
 
-const PostCard = ({ likeCount, commentCount, file }) => (
+const PostCard = ({ likeCount, commentCount, file, id }) => (
   <Container bg={file.url}>
-    <Overlay>
-      <Number>
-        <FullHeart />
-        <NumberText>{likeCount}</NumberText>
-      </Number>
-      <Number>
-        <FullComment />
-        <NumberText>{commentCount}</NumberText>
-      </Number>
-    </Overlay>
+    <Link to={`/posts/${id}`}>
+      <Overlay>
+        <Number>
+          <FullHeart />
+          <NumberText>{likeCount}</NumberText>
+        </Number>
+        <Number>
+          <FullComment />
+          <NumberText>{commentCount}</NumberText>
+        </Number>
+      </Overlay>
+    </Link>
   </Container>
 );
 

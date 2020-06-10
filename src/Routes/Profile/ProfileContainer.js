@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useQuery } from "react-apollo-hooks";
+import { useQuery, useMutation } from "react-apollo-hooks";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
-import { GET_USER } from "./ProfileQueries";
+import { GET_USER, LOG_OUT } from "./ProfileQueries";
 import ProfilePresenter from "./ProfilePresenter";
 
 const ProfileContainer = ({
@@ -14,7 +14,8 @@ const ProfileContainer = ({
   const { data, loading } = useQuery(GET_USER, {
     variables: { username },
   });
-  return <ProfilePresenter loading={loading} data={data} />;
+  const [logOut] = useMutation(LOG_OUT);
+  return <ProfilePresenter loading={loading} data={data} logOut={logOut} />;
 };
 
 export default ProfileContainer;

@@ -5,27 +5,27 @@ import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
 import PostCard from "../../Components/PostCard";
+import { Helmet } from "react-helmet";
 
 const Wrapper = styled.div`
   min-height: 85vh;
 `;
 
 const UserSection = styled.div`
-  margin-bottom: 70px;
   display: grid;
   grid-gap: 25px;
-  grid-template-columns: repeat(4, 160px);
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
+  grid-template-columns: repeat(5, 168px);
+  grid-auto-rows: 168px;
+  margin-bottom: 50px;
 `;
 
 const PostSection = styled.div`
   margin-bottom: 70px;
   display: grid;
   grid-gap: 25px;
-  grid-template-columns: repeat(4, 200px);
-  grid-template-rows: 200px;
+  grid-template-columns: repeat(4, auto);
   grid-auto-rows: 200px;
+  margin-bottom: 50px;
 `;
 
 const LoaderWrapper = styled.div`
@@ -46,6 +46,9 @@ const SearchPresenter = ({ loading, data, searchTerm }) => {
   } else if (data && data.searchUser && data.searchPost) {
     return (
       <Wrapper>
+        <Helmet>
+          <title>{searchTerm} | Instagram</title>
+        </Helmet>
         <UserSection>
           {data.searchUser.length === 0 ? (
             <FatText text={"No Users Found"} />
@@ -70,6 +73,7 @@ const SearchPresenter = ({ loading, data, searchTerm }) => {
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
                 file={post.files[0]}
+                id={post.id}
               />
             ))
           )}

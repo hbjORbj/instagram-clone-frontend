@@ -10,7 +10,7 @@ const Container = styled.button`
   font-weight: 600;
   text-align: center;
   padding: 10px;
-  width: 100%;
+  width: 100px;
   cursor: pointer;
   &:focus {
     outline: none;
