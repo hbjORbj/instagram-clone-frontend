@@ -9,7 +9,7 @@ import FollowButton from "../../Components/FollowButton/FollowButtonContainer";
 import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
-  min-height: 85vh;
+  min-height: 75vh;
   margin-bottom: 50px;
 `;
 

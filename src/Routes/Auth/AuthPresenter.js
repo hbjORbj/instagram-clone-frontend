@@ -5,7 +5,7 @@ import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 
 const Wrapper = styled.div`
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,6 @@ const Box = styled.div`
   border-radius:0px;
   width: 100%;
   max-width: 350px;
-  margin-bottom: 100px;
 `;
 
 const Form = styled(Box)`
@@ -41,6 +40,7 @@ const StateChanger = styled(Box)`
   text-align: center;
   padding: 20px 0px;
   font-size: 12px;
+  margin-bottom: 100px;
 `;
 
 const Link = styled.span`
@@ -93,24 +93,30 @@ const AuthPresenter = ({
             </Helmet>
             <form onSubmit={onSubmit}>
               <Input placeholder="Paste your login secret." {...secret} />
-              <Button text={"Log in"}></Button>
+              <Button text={"Log in"} />
             </form>
           </>
         )}
       </Form>
-      {action !== "confirm" && (
+      {action === "signUp" && (
         <StateChanger>
-          {action === "logIn" ? (
-            <>
-              Don't have an account?{" "}
-              <Link onClick={() => setAction("signUp")}>Sign up</Link>
-            </>
-          ) : (
-            <>
-              Have an account?{" "}
-              <Link onClick={() => setAction("logIn")}>Log in</Link>
-            </>
-          )}
+          <>
+            Have an account?{" "}
+            <Link onClick={() => setAction("logIn")}>Log in</Link>
+          </>
+        </StateChanger>
+      )}
+      {action === "logIn" && (
+        <StateChanger>
+          <>
+            Don't have an account?{" "}
+            <Link onClick={() => setAction("signUp")}>Sign up</Link>
+          </>
+        </StateChanger>
+      )}
+      {action === "confirm" && (
+        <StateChanger>
+          <>Almost there! </>
         </StateChanger>
       )}
     </Wrapper>

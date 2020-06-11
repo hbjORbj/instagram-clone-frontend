@@ -109,6 +109,9 @@ const UserLink = styled(Link)`
 
 const Caption = styled.div`
   margin: 8px 0px;
+  span {
+    margin-right: 5px;
+  }
 `;
 
 const PostPresenter = ({
@@ -155,19 +158,26 @@ const PostPresenter = ({
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
       <Caption>
-        <FatText text={username} /> {caption}
+        <UserLink to={`/users/${username}`}>
+          <FatText text={username} />
+        </UserLink>
+        {caption}
       </Caption>
       {comments && (
         <Comments>
           {comments.map((comment) => (
             <Comment key={comment.id}>
-              <FatText text={comment.user.username} />
+              <UserLink to={`/users/${comment.user.username}`}>
+                <FatText text={comment.user.username} />
+              </UserLink>
               {comment.text}
             </Comment>
           ))}
           {selfComments.map((comment) => (
             <Comment key={comment.id}>
-              <FatText text={comment.user.username} />
+              <UserLink to={`/users/${comment.user.username}`}>
+                <FatText text={comment.user.username} />
+              </UserLink>{" "}
               {comment.text}
             </Comment>
           ))}
